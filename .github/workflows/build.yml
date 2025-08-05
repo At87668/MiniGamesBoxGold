@@ -34,6 +34,18 @@ jobs:
       id: date
       run: echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
 
+    - name: Move Jar Files
+      run: |
+        mkdir ./build/libs/
+        cd "MiniGamesBox Classic"
+        cp ./build/libs/*.jar ../build/libs/
+        cd "MiniGamesBox Database"
+        cp ./build/libs/*.jar ../build/libs/
+        cd "MiniGamesBox Utils"
+        cp ./build/libs/*.jar ../build/libs/
+        cd "MiniGamesBox Inventory"
+        cp ./build/libs/*.jar ../build/libs/
+
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:

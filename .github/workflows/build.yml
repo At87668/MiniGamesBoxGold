@@ -26,18 +26,18 @@ jobs:
 
     - name: build
       run: |
-        cd "MiniGamesBox Classic"
         chmod +x ./gradlew
-        ./gradlew shadowJar
+        cd "MiniGamesBox Classic"
+        ../gradlew shadowJar
         cd "MiniGamesBox Database"
         chmod +x ./gradlew
-        ./gradlew shadowJar
+        ../gradlew shadowJar
         cd "MiniGamesBox Inventory"
         chmod +x ./gradlew
-        ./gradlew shadowJar
+        ../gradlew shadowJar
         cd "MiniGamesBox Utils"
         chmod +x ./gradlew
-        ./gradlew shadowJar
+        ../gradlew shadowJar
 
     - name: Get current date
       id: date

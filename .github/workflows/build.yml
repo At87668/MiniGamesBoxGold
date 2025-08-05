@@ -36,7 +36,10 @@ jobs:
 
     - name: Move Jar Files
       run: |
-        mkdir ./build/libs/
+        mkdir build
+        cd build
+        mkdir libs
+        cd ../..
         cd "MiniGamesBox Classic"
         cp ./build/libs/*.jar ../build/libs/
         cd "MiniGamesBox Database"

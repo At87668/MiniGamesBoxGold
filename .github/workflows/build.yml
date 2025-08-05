@@ -28,7 +28,7 @@ jobs:
       run: |
         chmod +x ./gradlew
         cd "MiniGamesBox Classic"
-        ../gradlew shadowJar
+        ../gradlew shadowJar --stacktrace
         cd "MiniGamesBox Database"
         chmod +x ./gradlew
         ../gradlew shadowJar

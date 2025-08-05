@@ -1,0 +1,51 @@
+name: Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Regardless of whether it is'
+        required: false
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+
+    - name: build
+      run: |
+        cd "MiniGamesBox Classic"
+        chmod +x ./gradlew
+        ./gradlew shadowJar
+        cd "MiniGamesBox Database"
+        chmod +x ./gradlew
+        ./gradlew shadowJar
+        cd "MiniGamesBox Inventory"
+        chmod +x ./gradlew
+        ./gradlew shadowJar
+        cd "MiniGamesBox Utils"
+        chmod +x ./gradlew
+        ./gradlew shadowJar
+
+    - name: Get current date
+      id: date
+      run: echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: SNAPSHOT-${{ steps.date.outputs.date }}
+        path: ./build/libs/*.jar
+        retention-days: 30
